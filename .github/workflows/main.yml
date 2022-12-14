@@ -1,0 +1,29 @@
+name: Android CI
+on:
+  push: 
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]  
+    
+jobs:
+   build:
+    runs-on: ubuntu-latest
+    steps:
+       - name: checkout
+         uses: actions/setup-node@v1
+       - name: Setup JDK
+         uses: actions/setup-java@v3.8.0
+         with:
+            java-version: 1.8
+       - name: Build with gradle
+         run: ./gradlew build
+       - name: Upload Apk
+         uses: actions/upload-artifact@v3.1.1
+       - with:
+          name: App
+          path: app/build/outputs/apk/debug/app-debug.apk
+         
+         
+        
+       
+     
